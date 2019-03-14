@@ -1,0 +1,1 @@
+$("h1").html("<h1>Hello friends!</h1>")
