@@ -12,7 +12,7 @@
     <!-- Full jQuery library -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <!-- Popper for Bootstrap -->
+    <!-- Popper for bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
@@ -20,19 +20,56 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <!-- Link to our javascript app.js -->
-    
-    <!-- Links to additional js files will go here -->
-
-    <!-- Link to our css -->
+    <!-- Link to firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+    <!-- Link to  firebase config.js -->
+    <script src="assets/js/config.js"></script>
+    <!-- Link to style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
     <title>Rock Paper Scissors</title>
 </head>
 
 <body>
-    <h1 id="hello-world">Whaddup World!</h1>
-  
-    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron">
+                    <h1 id="hello-world">Rock Paper Scissors</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <button type="button" class="btn btn-info" id="create-game-btn">Create a Game!</button>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped table-dark">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Join A Game</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Dummy Game #1</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Link to our javascript app.js -->
     <script src="assets/js/app.js"></script>
 </body>
 
