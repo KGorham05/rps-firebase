@@ -31,6 +31,8 @@
 </head>
 
 <body>
+
+    <!-- Heading Jumbotron (change to nav with authentication) -->
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -41,6 +43,7 @@
         </div>
     </div>
 
+    <!-- Create or Join a Game Container -->
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -57,7 +60,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope="row">Dummy Game #1</th>
+                                    <td scope="row">Dummy Game #1</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -67,7 +70,39 @@
         </div>
     </div>
 
+    <!-- Game Starting Modal -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Countdown Message -->
+                <p>An opponent has joined your game!</p>
+                <p>Your game will begin in <span id="counter-text"></span></p>
+                
+            </div>
+        </div>
+    </div>
 
+    <!-- Game Running Text Div -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- User Views-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" id="current-user-view">
+
+            </div>
+            <div class="col-md-6" id="opponent-view">
+
+            </div>
+        </div>
+    </div>
 
     <!-- Link to our javascript app.js -->
     <script src="assets/js/app.js"></script>
