@@ -36,7 +36,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="jumbotron">
+                <div class="jumbotron text-center">
                     <h1 id="hello-world">Rock Paper Scissors</h1>
                 </div>
             </div>
@@ -73,22 +73,45 @@
     <!-- Game Starting Modal -->
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <!-- Countdown Message -->
-                <p>An opponent has joined your game!</p>
-                <p>Your game will begin in <span id="counter-text"></span></p>
-                
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+
+                <div class="modal fade" id="game-start-modal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">An opponent has joined the game!</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <p>Your game will begin in <span id="counter-text">10</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 
     <!-- Game Running Text Div -->
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h1>Select your choice!</h1>
+                        <h1>10</h1>
+                    </div>
+                </div>
 
             </div>
+
         </div>
+    </div>
     </div>
 
 
@@ -96,10 +119,49 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6" id="current-user-view">
-
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h1>Rock</h1>
+                        <h1>Paper</h1>
+                        <h1>Scissors</h1>
+                    </div>
+                </div>
             </div>
             <div class="col-md-6" id="opponent-view">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h1>Your opponent's choice</h1>
+                        <h1>?</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Start Chatting!
+                    </div>
+                    <div class="card-body">
+                        <p><strong>User 1:</strong> You're going down!</p>
+                        <p><strong>User 2:</strong> Your mom is ugly!</p>
+                    </div>
+                    <div class="card-footer">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <input type="text" placeholder="Input text here!" class="form-control">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="submit" class="btn btn-info">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

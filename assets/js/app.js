@@ -19,6 +19,9 @@
         // on click change a state to "x selected"
             // change color of pick by changing image source, use js to increase the size of the selected element 
     // display chat window as sticky footer
-    
+
+    $('#game-start-modal').modal();
+    $('#game-start-modal').modal('show');
+    // need to stop modal from closing on click, only want it to close when timer reaches 0 
         
 

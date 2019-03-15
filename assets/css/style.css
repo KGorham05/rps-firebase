@@ -2,3 +2,11 @@ body {
     background: #343a40;
 }
 
+.card, .jumbotron {
+    background: #3e444a;
+}
+
+.card {
+    margin-bottom: 15px;
+    color: white;
+}
