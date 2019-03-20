@@ -5,25 +5,25 @@
 // When first visiting page, each user must login using firebase authentication or create an account 
 
 // on log in, show find game screen
-    // create a button to host a match
-        // on click change the color/text of that button
-        // update the game list
-        // don't allow someone who has a game created to join an open game 
-    // create a table of current matches waiting for players
-        // add a join game button
-            // on click, execute modal that says "2 players connected, game will start in 5...4..."
-            // when modal expires, change game state to "started" or "choice phase"
+// create a button to host a match
+// on click change the color/text of that button
+// update the game list
+// don't allow someone who has a game created to join an open game 
+// create a table of current matches waiting for players
+// add a join game button
+// on click, execute modal that says "2 players connected, game will start in 5...4..."
+// when modal expires, change game state to "started" or "choice phase"
 // on game started state/screen - 
-    // Display "You have 10 seconds to lock in your choice!" in message box
-    // display Rock Paper Scissors - 
-        // on click change a state to "x selected"
-            // change color of pick by changing image source, use js to increase the size of the selected element 
-    // display chat window as sticky footer
+// Display "You have 10 seconds to lock in your choice!" in message box
+// display Rock Paper Scissors - 
+// on click change a state to "x selected"
+// change color of pick by changing image source, use js to increase the size of the selected element 
+// display chat window as sticky footer
 
-    $('#game-start-modal').modal();
-    $('#game-start-modal').modal('show');
-    // need to stop modal from closing on click, only want it to close when timer reaches 0 
-        
+$('#game-start-modal').modal();
+$('#game-start-modal').modal('show');
+// need to stop modal from closing on click, only want it to close when timer reaches 0 
+
 var timer;
 var count = 10;
 
@@ -31,6 +31,13 @@ const rps = {
     // game variables
     wins: 0,
     losses: 0,
+    randomNum: 0,
+    playerChoice: '',
+    computerChoice: '',
+    opponentChoice: '',
+    versusComputer: true,
+    versusHuman: false,
+
 
     // game functions
     // function to start the game
@@ -41,30 +48,56 @@ const rps = {
         // reset variables from last game
         // start the countdown
         timer = setInterval(rps.decrement, 1000)
-        // listen for user choice 
+        // generate computer choice
+        rps.generateComputerChoice();
+        // listen for user choice
+        $(document).on("click", ".choice", function () {
+            playerChoice = (this.id);
+            if (rps.versusComputer) {
+                // call function to compare computer answer
+            } else {
+                // call func to compare vs opponent's choice 
+            }
+        })
+
         // if opponent is computer, generate a computer choice
         // compare to computer choice
         // if opponent is another user, listen for both users input
-    
 
     },
 
-    // func for timer decreasing
-    decrement: function () {
-        // reduce the count by 1 
-        count--;
-        // update the html
-        $("#count").text(count);
-        if (count <= 0) {
-            console.log("Count= 0!");
-            // if the user was playing the computer, he forefits
-            // if the user was vs another human, check for input instances 
+    generateComputerChoice: function () {
+        randomNum = Math.floor((Math.random() * 3) + 1);
+        console.log("random num: " + randomNum);
+        if (randomNum === 1) {
+            computerChoice = "rock";
+            console.log(computerChoice);
+        } else if (randomNum === 2) {
+            computerChoice = "paper";
+            console.log(computerChoice);
+        } else {
+            computerChoice = "scissors";
+            console.log(computerChoice);
         }
-            
-    }
+    },
 
 
-// End of rps game object
-};
+        // func for timer decreasing
+        decrement: function () {
+            // reduce the count by 1 
+            count--;
+            // update the html
+            $("#count").text(count);
+            if (count <= 0) {
+                console.log("Count= 0!");
+                // if the user was playing the computer, he forefits
+                // if the user was vs another human, check for input instances 
+            }
 
-rps.startGame();
+        }
+
+
+        // End of rps game object
+    };
+
+    rps.startGame();
