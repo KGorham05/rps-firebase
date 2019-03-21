@@ -1,4 +1,5 @@
-
+// RPS solution 
+// https://www.codecademy.com/en/forum_questions/50be9a6f9f1fcd5cb60000dc
 
 // Rock Paper Scissors Game
 
@@ -31,12 +32,13 @@ const rps = {
     // game variables
     wins: 0,
     losses: 0,
+    ties: 0,
     randomNum: 0,
     playerChoice: '',
     computerChoice: '',
     opponentChoice: '',
     versusComputer: true,
-    versusHuman: false,
+    // versusHuman: false,
 
 
     // game functions
@@ -53,8 +55,11 @@ const rps = {
         // listen for user choice
         $(document).on("click", ".choice", function () {
             playerChoice = (this.id);
+            console.log("playerChoice: " + playerChoice);
             if (rps.versusComputer) {
-                // call function to compare computer answer
+                // compare vs computer
+                console.log(rps.compare(playerChoice, computerChoice));
+                // update scoreboard
             } else {
                 // call func to compare vs opponent's choice 
             }
@@ -71,13 +76,13 @@ const rps = {
         console.log("random num: " + randomNum);
         if (randomNum === 1) {
             computerChoice = "rock";
-            console.log(computerChoice);
+            console.log("Comp choice: " + computerChoice);
         } else if (randomNum === 2) {
             computerChoice = "paper";
-            console.log(computerChoice);
+            console.log("Comp choice: " + computerChoice);
         } else {
             computerChoice = "scissors";
-            console.log(computerChoice);
+            console.log("Comp choice: " + computerChoice);
         }
     },
 
@@ -90,11 +95,52 @@ const rps = {
             $("#count").text(count);
             if (count <= 0) {
                 console.log("Count= 0!");
-                // if the user was playing the computer, he forefits
+                clearInterval(timer);
+                // if the user was playing the computer, display a modal saying you must select an answer!
                 // if the user was vs another human, check for input instances 
+                    // if user had an answer selected an opponent did not, user wins
+                    // if opponent had selected an answer but user did not, user loses
             }
 
-        }
+        },
+        compare: function(choice1, choice2){
+            if(choice1===choice2){
+                rps.ties++;
+                return "The result is a tie!";
+                
+            }
+            if(choice1==="rock"){
+                if(choice2==="scissors"){
+                    rps.wins++;
+                    return "You win! Rock crushes scissors!";
+                }
+                else{
+                    rps.losses++;
+                    return "Oh no, you lost! Paper covers rock!";
+                }
+            }
+            if(choice1==="paper"){
+                if(choice2==="rock"){
+                    rps.wins++;
+                    return "You win! Paper covers rock!";
+                }
+                else{
+                    rps.losses++;
+                    return "Oh no, you lost! Scissors cut paper!";
+                }
+            }
+            if(choice1==="scissors"){
+                if(choice2==="rock"){
+                    rps.losses++
+                    return "Oh no, you lost! Rock  crushes scissors!";
+                }
+                else{
+                    rps.wins++
+                    return "You win! Scissors cut paper!";
+                }
+            }
+        },
+        
 
 
         // End of rps game object
