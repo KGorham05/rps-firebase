@@ -49,7 +49,7 @@
                                 </button>
                             </div>
                             <div class="modal-body text-center">
-                                <p>Your game will begin in <span id="counter-text">10</span></p>
+                                <p>Your game will begin in <span class="modal-count">5</span></p>
                             </div>
                         </div>
                     </div>
@@ -63,18 +63,19 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <div class="modal fade" id="no-answer" tabindex="-1" role="dialog"
+                <div class="modal fade" id="no-answer-modal" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="no-answer-modal-title">You didn't select an answer in time!</h5>
+                                <h5 class="modal-title" id="no-answer-modal-title">You didn't select an answer in time!
+                                </h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body text-center">
-                                <p>Your game will begin in <span id="counter-text">10</span></p>
+                                <p>Another round will begin in <span class="count">5</span></p>
                             </div>
                         </div>
                     </div>
@@ -83,6 +84,57 @@
         </div>
     </div>
 
+    <!-- You won! Modal -->
+    <!-- COPYPASTA -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="modal fade" id="you-win-modal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="you-win-modal-text">You won!</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <p>Another round will begin in <span class="count">5</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- You lost! Modal -->
+    <!-- COPYPASTA -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="modal fade" id="you-lost-modal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="you-lost-modal-text">You Lost 🦁!</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <p>Another round will begin in <span class="count">5</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Heading Jumbotron (change to nav with authentication) -->
     <div class="container">
@@ -101,8 +153,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header text-center">
-                        <button type="button" class="btn btn-secondary btn-block" id="create-game-btn">Create a
-                            Game!</button>
+                        <button type="button" class="btn btn-secondary btn-block" id="challenge-btn">Challenge the
+                            machine!</button>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped table-dark">
@@ -129,8 +181,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body text-center">
-                        <h1>Select your choice!</h1>
-                        <h1 id="count">10</h1>
+                        <h1>Time Remaining</h1>
+                        <h1 class="count">10</h1>
                     </div>
                 </div>
 
@@ -147,7 +199,7 @@
             <div class="col-md-6" id="current-user-view">
                 <div class="card">
                     <div class="card-body text-center">
-                        <h1>Choose!</h1>
+                        <h1>Make your choice!</h1>
                         <h1 class="choice" id="rock">Rock</h1>
                         <h1 class="choice" id="paper">Paper</h1>
                         <h1 class="choice" id="scissors">Scissors</h1>
@@ -165,6 +217,34 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Scoreboard -->
+    <!-- COPYPASTA -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h1>Wins</h1>
+                        <h1 id="wins-count">0</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h1>Losses</h1>
+                        <h1 id="losses-count">0</h1>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
 
     <!-- Chat Box -->
@@ -185,8 +265,8 @@
                                 <div class="col-md-10">
                                     <input type="text" placeholder="Input text here!" class="form-control">
                                 </div>
-                                <div class="col-md-2">
-                                    <input type="submit" class="btn btn-info">
+                                <div class="col-md-2 text-center">
+                                    <input type="submit" class="btn btn-info text-center">
                                 </div>
                             </div>
                         </form>

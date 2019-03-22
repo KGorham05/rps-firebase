@@ -21,53 +21,98 @@
 // change color of pick by changing image source, use js to increase the size of the selected element 
 // display chat window as sticky footer
 
-$('#game-start-modal').modal();
-$('#game-start-modal').modal('show');
 // need to stop modal from closing on click, only want it to close when timer reaches 0 
 
 var timer;
-var count = 10;
+
 
 const rps = {
     // game variables
     wins: 0,
     losses: 0,
     ties: 0,
-    randomNum: 0,
+    count: '',
+    randomNum: '',
     playerChoice: '',
     computerChoice: '',
-    opponentChoice: '',
-    versusComputer: true,
-    // versusHuman: false,
+    // opponentChoice: '',
+    winner: '',
+    twoPlayersHaveJoined: '',
+
 
 
     // game functions
     // function to start the game
     startGame: function () {
         console.log("Game Started");
-        // hide game lobby
-        $("#game-lobby").empty();
-        // reset variables from last game
-        // start the countdown
-        timer = setInterval(rps.decrement, 1000)
+       
         // generate computer choice
         rps.generateComputerChoice();
-        // listen for user choice
-        $(document).on("click", ".choice", function () {
-            playerChoice = (this.id);
-            console.log("playerChoice: " + playerChoice);
-            if (rps.versusComputer) {
+        // if 2 players have joined the game, OR
+        if (rps.twoPlayersHaveJoined) {
+
+        };
+        // if the player has clicked the CHALLENGE THE MACHINE button DO THAT
+        // switch this to use a declared function that can also be called in the above if statement
+        $(document).on("click", "#challenge-btn", () => {
+            // DO THIS
+            // hide game lobby
+            $("#game-lobby").empty();
+            $('#game-start-modal').modal({
+                keyboard: false,
+                backdrop: 'static'
+              });
+            // start the countdown
+            rps.count = 5; 
+            timer = setInterval(rps.modalDecrement, 1000);                
+            setTimeout(function() {
+                rps.count=10;
+                setInterval(rps.decrement, 1000);
+            }, 5200);
+              
+            // listen for user choice
+            $(document).on("click", ".choice", function () {
+                // store the users choice into a database with firebase so the computer can make smart choices in the future
+                // ideally 1 large array of all users answers, and individuall arrays of each user 
+
+                playerChoice = (this.id);
+                console.log("playerChoice: " + playerChoice);
+
                 // compare vs computer
-                console.log(rps.compare(playerChoice, computerChoice));
-                // update scoreboard
-            } else {
-                // call func to compare vs opponent's choice 
-            }
+                let result = rps.compare(playerChoice, computerChoice);
+                // if player wins show winner model
+                if (rps.winner === '') {
+                    console.log("its a tie!")
+                    rps.startGame();
+                } else if (rps.winner) {
+                    // update game variables
+                    rps.wins++;
+                    // display the updated variables on the page
+                    $("#wins-count").text(rps.wins);
+                    // show you win modal
+                    $('#you-win-modal').modal();
+                    
+                    // restart the game 
+                    rps.startGame();
+                } else {
+                    rps.losses++;
+                    $("#losses-count").text(rps.losses)
+                    rps.startGame();
+                }
+                
+                console.log(result);
+                console.log("Winner: " + rps.winner);
+
+                
+                
+            })
+
+            // if opponent is computer, generate a computer choice
+            // compare to computer choice
+            // if opponent is another user, listen for both users input    
         })
 
-        // if opponent is computer, generate a computer choice
-        // compare to computer choice
-        // if opponent is another user, listen for both users input
+
 
     },
 
@@ -86,64 +131,68 @@ const rps = {
         }
     },
 
+    // func for timer decreasing
+    decrement: function () {
+        // reduce the count by 1 
+        rps.count--;
+        // update the html
+        $(".count").text(rps.count);
+        if (rps.count <= 0) {
+            clearInterval(timer);
+        }
+    },
 
-        // func for timer decreasing
-        decrement: function () {
-            // reduce the count by 1 
-            count--;
-            // update the html
-            $("#count").text(count);
-            if (count <= 0) {
-                console.log("Count= 0!");
-                clearInterval(timer);
-                // if the user was playing the computer, display a modal saying you must select an answer!
-                // if the user was vs another human, check for input instances 
-                    // if user had an answer selected an opponent did not, user wins
-                    // if opponent had selected an answer but user did not, user loses
-            }
+    modalDecrement: function () {
+        // reduce the count by 1 
+        rps.count--;
+        // update the html
+        $('.modal-count').text(rps.count);
+        if (rps.count <= 0) {
+            clearInterval(timer);
+            $('#game-start-modal').modal('hide');
+        }
+    },
 
-        },
-        compare: function(choice1, choice2){
-            if(choice1===choice2){
-                rps.ties++;
-                return "The result is a tie!";
-                
+    compare: function (choice1, choice2) {
+        if (choice1 === choice2) {
+            rps.winner = '';
+            return "The result is a tie!";
+        }
+        if (choice1 === "rock") {
+            if (choice2 === "scissors") {
+                rps.winner = true;
+                return "You win! Rock crushes scissors!";
             }
-            if(choice1==="rock"){
-                if(choice2==="scissors"){
-                    rps.wins++;
-                    return "You win! Rock crushes scissors!";
-                }
-                else{
-                    rps.losses++;
-                    return "Oh no, you lost! Paper covers rock!";
-                }
+            else {
+                rps.winner = false;
+                return "Oh no, you lost! Paper covers rock!";
             }
-            if(choice1==="paper"){
-                if(choice2==="rock"){
-                    rps.wins++;
-                    return "You win! Paper covers rock!";
-                }
-                else{
-                    rps.losses++;
-                    return "Oh no, you lost! Scissors cut paper!";
-                }
+        }
+        if (choice1 === "paper") {
+            if (choice2 === "rock") {
+                rps.winner = true;
+                return "You win! Paper covers rock!";
             }
-            if(choice1==="scissors"){
-                if(choice2==="rock"){
-                    rps.losses++
-                    return "Oh no, you lost! Rock  crushes scissors!";
-                }
-                else{
-                    rps.wins++
-                    return "You win! Scissors cut paper!";
-                }
+            else {
+                rps.winner = false;
+                return "Oh no, you lost! Scissors cut paper!";
             }
-        },
-        
+        }
+        if (choice1 === "scissors") {
+            if (choice2 === "rock") {
+                rps.winner = false;
+                return "Oh no, you lost! Rock  crushes scissors!";
+            }
+            else {
+                rps.winner = true;
+                return "You win! Scissors cut paper!";
+            }
+        }
+    },
 
+    // add on hover effects 
 
-        // End of rps game object
-    };
+    // End of rps game object
+};
 
-    rps.startGame();
+rps.startGame();
